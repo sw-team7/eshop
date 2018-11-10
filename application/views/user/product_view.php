@@ -63,13 +63,15 @@
 					<h2 class="product-name"><?= $product->product_name; ?></h2>
 					<div>
 						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
+							<?php for($i = 0; $i < 5; $i++) {
+								if ($i + 1 <= $product_rating) {
+									echo '<i class="fa fa-star"></i>';
+								} else {
+									echo '<i class="fa fa-star-o"></i>';
+								}
+							} ?>
 						</div>
-						<a class="review-link" href="#">10 Review(s) | Add your review</a>
+						<a class="review-link" href="#"><?=$ratings_count;?> Review(s) | Add your review</a>
 					</div>
 					<div>
 						<h3 class="product-price"><?= $product->price; ?>

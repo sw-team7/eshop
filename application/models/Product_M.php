@@ -73,4 +73,19 @@ class Product_M extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+	public function getTotalRatings($prod_id){
+		$query = $this->db->select_sum('rating')
+			->from("tbl_rating a")
+			->where('a.product_id', $prod_id)
+			->get();
+		$result = $query->result();
+		return $result;
+	}
+	public function getRatingsCount($prod_id){
+		$query = $this->db->select('*')
+			->from("tbl_rating a")
+			->where('a.product_id', $prod_id);
+		$result = $this->db->count_all_results();
+		return $result;
+	}
 }
