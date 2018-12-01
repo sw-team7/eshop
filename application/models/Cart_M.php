@@ -58,6 +58,20 @@ class Cart_M extends CI_Model
 			return false;
 		}
 	}
+
+	public function updateCart($data){
+		$field = array(
+			'quantity'=>$data['quantity']
+		);
+		$this->db->where('cart_id', $data['cart_id']);
+		$this->db->update('tbl_cart', $field);
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	function deleteProduct(){
 		$id = $this->input->get('id');
 		$this->db->where('cart_id', $id);

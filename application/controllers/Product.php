@@ -6,6 +6,7 @@ class Product extends MY_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('Product_M', 'prod');
+		$this->load->model('Ratings_M', 'rating');
 	}
 
 	public function info(){
@@ -39,5 +40,15 @@ class Product extends MY_Controller {
 			);
 			$this->load->view($this->user_view('template'), $data);
 		}
+	}
+
+	public function addRatings(){
+		$result = $this->rating->addRatings(session_id());
+		$msg['success'] = false;
+		$msg['type'] = 'add';
+		if($result){
+			$msg['success'] = true;
+		}
+		echo json_encode($msg);
 	}
 }

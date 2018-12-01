@@ -29,6 +29,23 @@
 				<div class="section-title">
 					<h3 class="title">Shopping Cart</h3>
 				</div>
+				<?php
+					if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['updateCart'])){
+						$this->load->helper('cart');
+						updateCart($_POST);
+					}
+				?>
+				<?php if($this->session->flashdata('cart-update')): ?>
+				<div class="bg-success">
+					<?php echo($this->session->flashdata('cart-update')); ?>
+				</div>
+				<?php endif; ?>
+
+				<?php if($this->session->flashdata('cart-delete')): ?>
+				<div class="bg-success">
+					<?php echo($this->session->flashdata('cart-delete')); ?>
+				</div>
+				<?php endif; ?>
 				<div class="table-responsive form-group">
 					<table class="table table-bordered">
 						<thead>
@@ -53,10 +70,10 @@
 							?>
 							<td class="text-center"><?php echo $i; ?></td>
 							<td class="text-center align-middle"><a
-									href="product.php?proid=<?=$row->product_id; ?>"><img width="70px" src="<?php echo base_url('assets/'.$row->image); ?>" alt="<?=$row->product_name; ?>"></a>
+									href="<?=base_url()?>product/info/<?=$row->product_id; ?>"><img width="70px" src="<?php echo base_url('assets/'.$row->image); ?>" alt="<?=$row->product_name; ?>"></a>
 							</td>
 							<td class="text-left"><a
-									href="product.php?proid=<?=$row->product_id; ?>"><?=$row->product_name; ?></a><br/>
+									href="<?=base_url()?>product/info/<?=$row->product_id; ?>"><?=$row->product_name; ?></a><br/>
 							</td>
 							<td class="text-left"><?=$row->product_id; ?></td>
 							<td class="text-left" width="200px">
@@ -73,11 +90,11 @@
 									</div>
 
 									<span class="input-group-btn">
-                        <button type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i
+                        <button name="updateCart" type="submit" data-toggle="tooltip" title="Update" class="btn btn-primary"><i
 								class="fa fa-clone"></i></button>
                         <div data-toggle="tooltip" class="btn btn-danger"><a
 								onclick="return confirm('Are you sure to delete !!') "
-								href="?deleteProduct=<?=$row->cart_id; ?>"><i
+								href="<?=base_url()?>cart/delete?id=<?=$row->cart_id; ?>"><i
 									class="fa fa-times-circle"></i></a></div>
                         </span>
 								</form>
