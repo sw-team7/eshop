@@ -9,7 +9,7 @@
 	<title><?php echo $page_title; ?> | Electronics Shop</title>
 
 	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+<!--	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">-->
 
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css"/>

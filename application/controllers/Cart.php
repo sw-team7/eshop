@@ -12,7 +12,8 @@ class Cart extends MY_Controller
 	{
 		$cart = $this->cart->getCart();
 		$data = array(
-			'view' => $this->user_view('cart_view'),
+			'view' => $this->user_view('cart_page/cart_view'),
+			'javascripts' => $this->user_view('cart_page/javascripts'),
 			'page_title' => 'Home Page',
 			'cart' => $cart
 		);
@@ -57,6 +58,24 @@ class Cart extends MY_Controller
 			$this->session->set_flashdata('cart-delete', 'Product Deleted from cart');
 		}
 		redirect('cart', 'refresh');
+	}
+
+	public function getcart(){
+		$cart = $this->cart->getCart();
+		$data = array(
+			'cart' => $cart
+		);
+		$this->load->view('user/cart_page/ajax_cart', $data);
+	}
+
+	public function upCart(){
+		$result = $this->cart->ajaxCart();
+		$msg['success'] = false;
+		$msg['type'] = 'update';
+		if($result){
+			$msg['success'] = true;
+		}
+		echo json_encode($msg);
 	}
 
 

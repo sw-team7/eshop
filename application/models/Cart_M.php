@@ -83,4 +83,19 @@ class Cart_M extends CI_Model
 		}
 	}
 
+	public function ajaxCart(){
+		$id = $this->input->post('id');
+		$qty = $this->input->post('qty');
+		$field = array(
+			'quantity'=>$qty
+		);
+		$this->db->where('cart_id', $id);
+		$this->db->update('tbl_cart', $field);
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }
